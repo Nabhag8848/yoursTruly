@@ -12,5 +12,16 @@
     "nameSlug": "appsai",
     "classFile": "AppsAiApp.ts",
     "description": "Everything that you need to improve your communication",
-    "implements": []
+    "implements": [],
+    "permissions": [
+        {
+            "name": "slashcommand"
+        },
+        {
+            "name": "networking"
+        },
+        {
+            "name": "message.write"
+        }
+    ]
 }

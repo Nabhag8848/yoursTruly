@@ -39,7 +39,7 @@ export class CompletionCommand implements ISlashCommand {
             .getUserReader()
             .getAppUser()) as IUser;
 
-        const parameter = context.getArguments()[0];
+        const prompt: string = context.getArguments()[0];
 
         const { value: Secret } = await read
             .getEnvironmentReader()
@@ -50,22 +50,22 @@ export class CompletionCommand implements ISlashCommand {
             "https://api.openai.com/v1/completions",
             {
                 data: {
-                    model: "text-davinci-002",
-                    prompt: parameter,
-                    temperature: 0,
-                    max_tokens: 64,
+                    model: "text-davinci-003",
+                    prompt,
+                    temperature: 0.3,
+                    max_tokens: 60,
                     top_p: 1.0,
                     frequency_penalty: 0.0,
                     presence_penalty: 0.0,
                 },
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer"
+                    Authorization: `Bearer ${Secret}`,
                 },
             }
         );
 
-        const text = completion.data.choices[0].text.trim();
+        const text: string = completion.data.choices[0].text.trim();
 
         const block = creator.getBlockBuilder();
 
@@ -90,7 +90,6 @@ export class CompletionCommand implements ISlashCommand {
             ],
         });
 
-        
         const message = creator
             .startMessage()
             .setSender(sender)
