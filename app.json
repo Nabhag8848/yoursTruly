@@ -22,6 +22,18 @@
         },
         {
             "name": "message.write"
+        },
+        {
+            "name": "ui.registerButtons"
+        },
+        {
+            "name": "ui.interact"
+        },
+        {
+            "name": "room.read"
+        },
+        {
+            "name": "persistence"
         }
     ]
 }
