@@ -57,20 +57,13 @@ export class AppsAiApp extends App {
             .getByName("general")) as IRoom;
 
         const completion = await http.post(
-            "https://api.openai.com/v1/completions",
+            "http://appsai.ap-south-1.elasticbeanstalk.com/code/translation",
             {
                 data: {
-                    model: "text-davinci-003",
                     prompt,
-                    temperature: 0.3,
-                    max_tokens: 60,
-                    top_p: 1.0,
-                    frequency_penalty: 0.0,
-                    presence_penalty: 0.0,
                 },
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${Secret}`,
                 },
             }
         );
@@ -82,7 +75,7 @@ export class AppsAiApp extends App {
         block.addSectionBlock({
             text: {
                 type: TextObjectType.MARKDOWN,
-                text: `\`\`\`${text} \`\`\``,
+                text: `\`\`\`${text}\`\`\``,
             },
         });
 

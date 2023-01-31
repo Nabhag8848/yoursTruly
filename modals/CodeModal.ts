@@ -42,15 +42,86 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
                         text: block.newPlainTextObject("Output"),
                         value: "output",
                     },
-
-                    // no able to add 4th option giving error
-                    /* Error commands/Completion.ts (76,29): Property 'text' is missing in type 
-                        'IPlainTextInputElement' but required in type 'ITextObject'.
-                        */
+                    {
+                        text: block.newPlainTextObject("Explain"),
+                        value: "explain",
+                    },
                 ],
             }),
         ],
     });
+
+    block.addSectionBlock({
+        text: {
+            text: "**From**",
+            type: TextObjectType.MARKDOWN,
+        },
+    });
+
+    block.addActionsBlock({
+        elements: [
+            block.newStaticSelectElement({
+                placeholder: block.newPlainTextObject("JavaScript"),
+                actionId: "type",
+                initialValue: "javascript",
+                options: [
+                    {
+                        text: block.newPlainTextObject("JavaScript"),
+                        value: "javascript",
+                    },
+                    {
+                        text: block.newPlainTextObject("Python"),
+                        value: "python",
+                    },
+                    {
+                        text: block.newPlainTextObject("TypeScript"),
+                        value: "typescript",
+                    },
+                    {
+                        text: block.newPlainTextObject("Java"),
+                        value: "java",
+                    },
+                ],
+            }),
+        ],
+    });
+
+    block.addSectionBlock({
+        text: {
+            text: "**To**",
+            type: TextObjectType.MARKDOWN,
+        },
+    });
+
+    block.addActionsBlock({
+        elements: [
+            block.newStaticSelectElement({
+                placeholder: block.newPlainTextObject("JavaScript"),
+                actionId: "type",
+                initialValue: "javascript",
+                options: [
+                    {
+                        text: block.newPlainTextObject("JavaScript"),
+                        value: "javascript",
+                    },
+                    {
+                        text: block.newPlainTextObject("Python"),
+                        value: "python",
+                    },
+                    {
+                        text: block.newPlainTextObject("TypeScript"),
+                        value: "typescript",
+                    },
+                    {
+                        text: block.newPlainTextObject("Java"),
+                        value: "java",
+                    },
+                ],
+            }),
+        ],
+    });
+
+    block.addDividerBlock();
 
     block.addInputBlock({
         blockId: "inputBlock",
