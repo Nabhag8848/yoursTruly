@@ -24,6 +24,7 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
     });
 
     block.addActionsBlock({
+        blockId: "Select",
         elements: [
             block.newStaticSelectElement({
                 placeholder: block.newPlainTextObject("Translate"),
@@ -59,10 +60,11 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
     });
 
     block.addActionsBlock({
+        blockId: "From",
         elements: [
             block.newStaticSelectElement({
                 placeholder: block.newPlainTextObject("JavaScript"),
-                actionId: "type",
+                actionId: "source",
                 initialValue: "javascript",
                 options: [
                     {
@@ -94,10 +96,11 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
     });
 
     block.addActionsBlock({
+        blockId: "To",
         elements: [
             block.newStaticSelectElement({
                 placeholder: block.newPlainTextObject("JavaScript"),
-                actionId: "type",
+                actionId: "dest",
                 initialValue: "javascript",
                 options: [
                     {
