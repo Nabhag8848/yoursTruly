@@ -5,49 +5,43 @@ import {
     TextObjectType,
 } from "@rocket.chat/apps-engine/definition/uikit";
 import { IUIKitModalViewParam } from "@rocket.chat/apps-engine/definition/uikit/UIKitInteractionResponder";
-export function CodeModal(modify: IModify): IUIKitModalViewParam {
+export function generateModal(modify: IModify): IUIKitModalViewParam {
     const block = modify.getCreator().getBlockBuilder();
 
     block.addSectionBlock({
         text: {
-            text: "**Translate your Code and share message or notification to channel**",
-            type: TextObjectType.MARKDOWN,
+            text: "Generate, Output or get Explaination of your Code and share to channel.",
+            type: TextObjectType.PLAINTEXT,
         },
     });
 
     block.addDividerBlock();
- 
     block.addSectionBlock({
         text: {
-            text: "**From**",
+            text: "**What you want to do :question:**",
             type: TextObjectType.MARKDOWN,
         },
     });
 
-
     block.addActionsBlock({
-        blockId: "From",
+        blockId: "Select",
         elements: [
             block.newStaticSelectElement({
-                placeholder: block.newPlainTextObject("JavaScript"),
-                actionId: "source",
-                initialValue: "javascript",
+                placeholder: block.newPlainTextObject("Generate"),
+                actionId: "type",
+                initialValue: "generate",
                 options: [
                     {
-                        text: block.newPlainTextObject("JavaScript"),
-                        value: "javascript",
+                        text: block.newPlainTextObject("Generate"),
+                        value: "generate",
                     },
                     {
-                        text: block.newPlainTextObject("Python"),
-                        value: "python",
+                        text: block.newPlainTextObject("Output"),
+                        value: "output",
                     },
                     {
-                        text: block.newPlainTextObject("TypeScript"),
-                        value: "typescript",
-                    },
-                    {
-                        text: block.newPlainTextObject("Java"),
-                        value: "java",
+                        text: block.newPlainTextObject("Explain"),
+                        value: "explain",
                     },
                 ],
             }),
@@ -56,17 +50,17 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
 
     block.addSectionBlock({
         text: {
-            text: "**To**",
+            text: "**Select Language :rocket:**",
             type: TextObjectType.MARKDOWN,
         },
     });
 
     block.addActionsBlock({
-        blockId: "To",
+        blockId: "Language",
         elements: [
             block.newStaticSelectElement({
                 placeholder: block.newPlainTextObject("JavaScript"),
-                actionId: "dest",
+                actionId: "source",
                 initialValue: "javascript",
                 options: [
                     {
@@ -95,13 +89,13 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
     block.addInputBlock({
         blockId: "inputBlock",
         label: {
-            text: "**Enter Code**",
+            text: "**Input your prompt/code here :man_technologist:**",
             type: TextObjectType.MARKDOWN,
         },
         element: {
-            actionId: "Code",
+            actionId: "InputPrompt",
             placeholder: {
-                text: "paste your code here",
+                text: "paste here",
                 type: TextObjectType.PLAINTEXT,
             },
             type: BlockElementType.PLAIN_TEXT_INPUT,
@@ -128,6 +122,8 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
             },
         },
         blocks: block.getBlocks(),
-        title: block.newMarkdownTextObject("Translate Code :free:"),
+        title: block.newMarkdownTextObject(
+            "Generation / Explanation of Code :rainbow:"
+        ),
     };
 }

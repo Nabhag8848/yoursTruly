@@ -8,9 +8,9 @@
         "homepage": "n/a",
         "support": "n/a"
     },
-    "name": "Apps.AI",
-    "nameSlug": "appsai",
-    "classFile": "AppsAiApp.ts",
+    "name": "YoursTruly",
+    "nameSlug": "yourstruly",
+    "classFile": "yoursTrulyApp.ts",
     "description": "Everything that you need to improve your communication",
     "implements": [],
     "permissions": [
