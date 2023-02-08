@@ -26,6 +26,7 @@ import {
     RocketChatAssociationModel,
     RocketChatAssociationRecord,
 } from "@rocket.chat/apps-engine/definition/metadata";
+import { getInteractionRoomData } from "./persistance/roomInteraction";
 export class AppsAiApp extends App {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
@@ -52,12 +53,14 @@ export class AppsAiApp extends App {
             .getEnvironmentReader()
             .getSettings()
             .getById(AppSetting.SECRET_TOKEN);
-
-        console.log(Secret);
-
+        const persistenceRead = read.getPersistenceReader();
+        const { roomId } = await getInteractionRoomData(
+            persistenceRead,
+            user.id
+        );
         const room: IRoom = (await read
             .getRoomReader()
-            .getByName("general")) as IRoom;
+            .getById(roomId)) as IRoom;
 
         const completion = await http.post(
             "https://api.openai.com/v1/completions",

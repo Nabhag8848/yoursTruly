@@ -21,6 +21,7 @@ import {
 import { BlockElementType } from "@rocket.chat/apps-engine/definition/uikit";
 import { ButtonStyle } from "@rocket.chat/apps-engine/definition/uikit";
 import { CodeModal } from "../modals/CodeModal";
+import { storeInteractionRoomData } from "../persistance/roomInteraction";
 
 export class CompletionCommand implements ISlashCommand {
     public command: string = "ai";
@@ -37,6 +38,10 @@ export class CompletionCommand implements ISlashCommand {
     ): Promise<void> {
         // First of all open the Modal
         const modal = CodeModal(modify);
+        const room = context.getRoom();
+        const user = context.getSender();
+
+        await storeInteractionRoomData(persistence, user.id, room.id);
 
         await modify.getUiController().openModalView(
             modal,
