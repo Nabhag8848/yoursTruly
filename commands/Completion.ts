@@ -10,7 +10,10 @@ import { IMessage } from "@rocket.chat/apps-engine/definition/messages";
 import { IRoom } from "@rocket.chat/apps-engine/definition/rooms";
 import {
     ISlashCommand,
+    ISlashCommandPreview,
+    ISlashCommandPreviewItem,
     SlashCommandContext,
+    SlashCommandPreviewItemType,
 } from "@rocket.chat/apps-engine/definition/slashcommands";
 import { IUser } from "@rocket.chat/apps-engine/definition/users";
 import { AppSetting } from "../config/Settings";
@@ -23,12 +26,15 @@ import { ButtonStyle } from "@rocket.chat/apps-engine/definition/uikit";
 import { CodeModal } from "../modals/CodeModal";
 import { storeInteractionRoomData } from "../persistance/roomInteraction";
 import { OptionModal } from "../modals/Option";
+import { yoursTrulyApp } from "../yoursTrulyApp";
 
 export class CompletionCommand implements ISlashCommand {
     public command: string = "ai";
     public i18nDescription: string = "Generates a predictive Completion";
     public i18nParamsExample: string = "";
-    public providesPreview: boolean = false;
+    public providesPreview: boolean = true;
+
+    constructor(private readonly app: yoursTrulyApp) {}
 
     public async executor(
         context: SlashCommandContext,
@@ -52,4 +58,32 @@ export class CompletionCommand implements ISlashCommand {
             context.getSender()
         );
     }
+    // image generation init
+    public async previewer(
+        context: SlashCommandContext,
+        read: IRead,
+        modify: IModify,
+        http: IHttp,
+        persis: IPersistence
+    ): Promise<ISlashCommandPreview> {
+        return {
+            i18nTitle: "title of preview",
+            items: [
+                {
+                    id: "id of preview",
+                    type: SlashCommandPreviewItemType.IMAGE,
+                    value: "https://images.meesho.com/images/products/94705368/0mxfw_256.webp",
+                },
+            ],
+        };
+    }
+
+    public async executePreviewItem(
+        item: ISlashCommandPreviewItem,
+        context: SlashCommandContext,
+        read: IRead,
+        modify: IModify,
+        http: IHttp,
+        persis: IPersistence
+    ): Promise<void> {}
 }

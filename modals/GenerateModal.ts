@@ -100,6 +100,7 @@ export function generateModal(modify: IModify): IUIKitModalViewParam {
             },
             type: BlockElementType.PLAIN_TEXT_INPUT,
         },
+        optional: false,
     });
 
     return {

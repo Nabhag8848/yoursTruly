@@ -19,7 +19,7 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
  
     block.addSectionBlock({
         text: {
-            text: "**From**",
+            text: "**Select Languages**",
             type: TextObjectType.MARKDOWN,
         },
     });
@@ -51,23 +51,10 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
                     },
                 ],
             }),
-        ],
-    });
-
-    block.addSectionBlock({
-        text: {
-            text: "**To**",
-            type: TextObjectType.MARKDOWN,
-        },
-    });
-
-    block.addActionsBlock({
-        blockId: "To",
-        elements: [
             block.newStaticSelectElement({
-                placeholder: block.newPlainTextObject("JavaScript"),
+                placeholder: block.newPlainTextObject("Python"),
                 actionId: "dest",
-                initialValue: "javascript",
+                initialValue: "python",
                 options: [
                     {
                         text: block.newPlainTextObject("JavaScript"),

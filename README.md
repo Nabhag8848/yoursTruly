@@ -1,5 +1,8 @@
-# Apps.AI
+# yoursTruly
 Everything that you need to improve your communication
+
+# Initial Glimpses
+
 
 ## Getting Started
 Now that you have generated a blank default Rocket.Chat App, what are you supposed to do next?

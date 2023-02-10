@@ -171,7 +171,7 @@ export class yoursTrulyApp extends App {
             })
         );
 
-        const completionCommand: CompletionCommand = new CompletionCommand();
+        const completionCommand: CompletionCommand = new CompletionCommand(this);
         configuration.slashCommands.provideSlashCommand(completionCommand);
     }
 }
