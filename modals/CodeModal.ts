@@ -85,14 +85,15 @@ export function CodeModal(modify: IModify): IUIKitModalViewParam {
             text: "**Enter Code**",
             type: TextObjectType.MARKDOWN,
         },
-        element: {
+        element: block.newPlainTextInputElement({
             actionId: "Code",
             placeholder: {
                 text: "paste your code here",
                 type: TextObjectType.PLAINTEXT,
             },
-            type: BlockElementType.PLAIN_TEXT_INPUT,
-        },
+            multiline: true,
+        }),
+        optional: false,
     });
 
     return {

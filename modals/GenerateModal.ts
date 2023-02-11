@@ -92,14 +92,14 @@ export function generateModal(modify: IModify): IUIKitModalViewParam {
             text: "**Input your prompt/code here :man_technologist:**",
             type: TextObjectType.MARKDOWN,
         },
-        element: {
+        element: block.newPlainTextInputElement({
             actionId: "InputPrompt",
             placeholder: {
                 text: "paste here",
                 type: TextObjectType.PLAINTEXT,
             },
-            type: BlockElementType.PLAIN_TEXT_INPUT,
-        },
+            multiline: true,
+        }),
         optional: false,
     });
 
