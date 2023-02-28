@@ -15,7 +15,7 @@ import {
     IUIKitResponse,
     UIKitViewSubmitInteractionContext,
 } from "@rocket.chat/apps-engine/definition/uikit";
-import { CompletionCommand } from "./commands/Completion";
+import { YoursTrulyCommand } from "./commands/yoursTruly";
 import { settings } from "./config/Settings";
 import { AppSetting } from "./config/Settings";
 import { TextObjectType } from "@rocket.chat/apps-engine/definition/uikit";
@@ -33,6 +33,7 @@ import { getInteractionRoomData } from "./persistance/roomInteraction";
 import { CodeModal } from "./modals/CodeModal";
 import { generateModal } from "./modals/GenerateModal";
 import { IUIKitModalViewParam } from "@rocket.chat/apps-engine/definition/uikit/UIKitInteractionResponder";
+import { GenerateCommand } from "./commands/generate";
 export class yoursTrulyApp extends App {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
@@ -171,7 +172,11 @@ export class yoursTrulyApp extends App {
             })
         );
 
-        const completionCommand: CompletionCommand = new CompletionCommand(this);
-        configuration.slashCommands.provideSlashCommand(completionCommand);
+        const yoursTrulyCommand: YoursTrulyCommand = new YoursTrulyCommand(
+            this
+        );
+        const generateCommand: GenerateCommand = new GenerateCommand(this);
+        configuration.slashCommands.provideSlashCommand(yoursTrulyCommand);
+        configuration.slashCommands.provideSlashCommand(generateCommand);
     }
 }
