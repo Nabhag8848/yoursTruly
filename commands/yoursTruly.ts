@@ -66,41 +66,43 @@ export class YoursTrulyCommand implements ISlashCommand {
                 break;
             }
             case "sql": {
-
                 break;
             }
             case "help": {
                 const user = context.getSender();
                 const helperText =
-                    "You can run:\n" +
+                    "YourTruly App:\n" +
                     "`/yourstruly code` to translate, generate, get output or explanation of code\n" +
                     "`/yourstruly sql` to generate sql queries\n" +
-                    "`/yourstruly help` to get the help about using commands\n";
+                    "`/yourstruly help` to get the help about using commands\n" +
+                    "`/generate <prompt> search` to generate images";
 
                 await sendNotification(
                     modify,
                     context.getRoom(),
                     user,
-                    helperText
+                    helperText,
+                    true
                 );
                 break;
             }
             default: {
                 const user = context.getSender();
                 const helperText =
-                    "You can run:\n" +
+                    "YourTruly App:\n" +
                     "`/yourstruly code` to translate, generate, get output or explanation of code\n" +
                     "`/yourstruly sql` to generate sql queries\n" +
-                    "`/yourstruly help` to get the help about using commands\n";
+                    "`/yourstruly help` to get the help about using commands\n" +
+                    "`/generate <prompt> search` to generate images";
 
                 await sendNotification(
                     modify,
                     context.getRoom(),
                     user,
-                    helperText
+                    helperText,
+                    true
                 );
             }
         }
     }
-    
 }
