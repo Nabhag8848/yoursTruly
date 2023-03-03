@@ -6,9 +6,21 @@ export async function sendNotification(
     modify: IModify,
     room: IRoom,
     sender: IUser,
-    message: string
+    message: string,
+    attachements?: boolean
 ): Promise<void> {
-    let msg = modify.getCreator().startMessage().setRoom(room).setText(message);
+    let msg = modify.getCreator().startMessage().setRoom(room);
+
+    if (attachements) {
+        msg.setAttachments([
+            {
+                imageUrl:
+                    "https://res.cloudinary.com/dim2ekub1/image/upload/c_scale,w_128/v1677881322/yoursTrulyLogo_ufdc1x.png",
+            },
+        ]);
+    }
+
+    msg.setText(message);
 
     const block = modify.getCreator().getBlockBuilder();
 
@@ -17,6 +29,6 @@ export async function sendNotification(
     });
 
     msg.setBlocks(block);
-    
+
     return await modify.getNotifier().notifyUser(sender, msg.getMessage());
 }

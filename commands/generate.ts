@@ -47,20 +47,12 @@ export class GenerateCommand implements ISlashCommand {
         if (param == "search") {
             const prompt = context.getArguments()[0];
 
-            const { value: Secret } = await read
-                .getEnvironmentReader()
-                .getSettings()
-                .getById(AppSetting.SECRET_TOKEN);
             const response = await http.post(
-                "https://api.openai.com/v1/images/generations",
+                "http://rcapps-yourstruly.ap-south-1.elasticbeanstalk.com/generate/image",
                 {
-                    headers: {
-                        Authorization: `Bearer ${Secret}`,
-                        "Content-Type": "application/json",
-                    },
                     data: {
                         prompt,
-                        n: 10,
+                        n: 6,
                         size: "256x256",
                     },
                 }
@@ -68,17 +60,17 @@ export class GenerateCommand implements ISlashCommand {
 
             let id = 1;
 
-            const items: Array<ISlashCommandPreviewItem> =
-                response?.data?.data.forEach((res) => {
-                    id = id + 1;
-                    return {
-                        id: id.toString(),
-                        type: SlashCommandPreviewItemType.IMAGE,
-                        value: res.url,
-                    };
+            const items: Array<ISlashCommandPreviewItem> = [];
+            response?.data.forEach(async (res) => {
+                items.push({
+                    id: id.toString(),
+                    type: SlashCommandPreviewItemType.IMAGE,
+                    value: res.url,
                 });
+                id = id + 1;
+            });
             return {
-                i18nTitle: "title of preview",
+                i18nTitle: "Images was generated using DALL E Model of Provided by OpenAI",
                 items,
             };
         } else {
@@ -114,8 +106,10 @@ export class GenerateCommand implements ISlashCommand {
             .setSender(sender)
             .setAttachments([
                 {
+                    color: "#F5455C",
                     title: {
-                        value: "This is value of image",
+                        value: "This image is generated from yoursTruly!",
+                        displayDownloadLink: true,
                     },
                     imageUrl,
                 },
